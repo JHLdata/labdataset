@@ -1,0 +1,23 @@
+#Load the CSV file into a pandas DataFrame
+sales_df = pd.read_csv('client_purchases.csv')
+
+
+#Check the first few rows of the DataFrame
+sales_df.head()
+
+#Check the data types of each column
+sales_df.dtypes
+
+#Drop any unnecessary columns that are not needed for analysis
+sales_df = sales_df.drop(columns=['Customer Email'])
+
+#Convert the 'Date' column to a datetime data type
+sales_df['Date'] = pd.to_datetime(sales_df['Date'])
+
+#Check for and handle any missing values
+sales_df.isnull().sum()  # Check for missing values
+sales_df = sales_df.dropna()  # Drop rows with missing values
+
+#Convert categorical variables to categorical data type for efficient storage and analysis
+sales_df['Product'] = sales_df['Product'].astype('category')  # Convert 'Product' column to categorical
+sales_df['Customer_City'] = sales_df['Customer_City'].astype('category')  # Convert 'Customer_City' column to categorical
